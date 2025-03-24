@@ -1,3 +1,3 @@
-# Dexeption Muv - Web
+# Nepak Point - Web
 
-Dexeption Muv Web is the frontend of Dexeption's e-commerce personal project.
+Nepak Point Web is the frontend of Nepak Point's e-commerce personal project.
