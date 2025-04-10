@@ -29,7 +29,7 @@ export function Header() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/products/search?q=${encodeURIComponent(query)}`
+        `${process.env.BACKEND_API_URL}/products/search?q=${query}`
       );
       const data = await response.json();
       setSearchResults(data);
