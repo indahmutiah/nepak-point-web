@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import type { Products } from "~/modules/product/type";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -20,35 +21,16 @@ export function meta({}: Route.MetaArgs) {
     },
   ];
 }
-type Product = {
-  id: string;
-  name: string;
-  slug: string;
-  series: string | null;
-  description: string | null;
-  price: number;
-  imageUrl: string;
-  categoryId: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
 
-type Products = Product[];
-
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
-  const response = await fetch(`http://localhost:3000/products`);
+export async function loader({}: Route.LoaderArgs) {
+  const response = await fetch(`${process.env.BACKEND_API_URL}/products`);
   const products: Products = await response.json();
   return products;
 }
 
-// HydrateFallback is rendered while the client loader is running
-export function HydrateFallback() {
-  return <div>Loading...</div>;
-}
-
 export default function Home({ loaderData }: Route.ComponentProps) {
   const products = loaderData;
-  console.log("Products:", products);
+
   return (
     <div>
       <Header />
