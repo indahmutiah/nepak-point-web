@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
+import { Input } from "~/components/ui/input";
 
 export function Header() {
   return (
@@ -18,6 +19,13 @@ export function Header() {
         </div>
         <div className="hover:bg-slate-200 rounded-md p-1">
           <ShoppingCart className="w-6 h-6 text-slate-700" />
+        </div>
+        <div className="w-80">
+          <Input
+            type="text"
+            placeholder="Search..."
+            className="bg-slate-200 text-slate-400"
+          />
         </div>
       </div>
     </header>
