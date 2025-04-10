@@ -15,13 +15,18 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader({}: Route.LoaderArgs) {
-  const response = await fetch(`${process.env.BACKEND_API_URL}/products`);
+export async function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q") || "";
+
+  const response = await fetch(
+    `${process.env.BACKEND_API_URL}/products/search?q=${q}`
+  );
   const products: Products = await response.json();
   return products;
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Search({ loaderData }: Route.ComponentProps) {
   const products = loaderData;
 
   return (
