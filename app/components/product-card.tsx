@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
           <p>{product.series}</p>
         </div>
         <div className="pt-4">
-          <h2 className="text-lg font-black text-primary">
+          <h2 className="text-lg font-black text-blue-300">
             {new Intl.NumberFormat("id-ID", {
               style: "currency",
               currency: "IDR",
