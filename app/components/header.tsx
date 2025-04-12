@@ -16,7 +16,7 @@ export function Header() {
       <div className="flex flex-row items-center gap-4">
         <Form method="get" action="/search">
           <Input
-            name="search"
+            name="q"
             placeholder="Search"
             className="w-full rounded-md p-2 border-2 border-slate-300"
           />
