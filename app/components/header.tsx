@@ -22,29 +22,31 @@ export function Header() {
           />
         </Form>
       </div>
-      <div className="flex items-center gap-4 mr-4">
-        <div className="hover:bg-slate-200 rounded-md p-1">
-          <a href="/" className="text-slate-500">
-            Home
-          </a>
-        </div>
-        <div className="hover:bg-slate-200 rounded-md p-1">
-          <a href="/" className="text-slate-500">
-            Category
-          </a>
-        </div>
-        <div className="hover:bg-slate-200 rounded-md p-1">
-          <a href="/about" className="text-slate-500">
-            About
-          </a>
-        </div>
-        <div className="hover:bg-slate-200 rounded-md p-1">
-          <User className="w-6 h-6 text-slate-500" />
-        </div>
-        <div className="hover:bg-slate-200 rounded-md p-1">
-          <ShoppingCart className="w-6 h-6 text-slate-500" />
-        </div>
-      </div>
+      <nav className="flex items-center gap-4 mr-4">
+        <ul className="flex items-center gap-4">
+          <li className="hover:bg-slate-200 rounded-md p-1">
+            <a href="/" className="text-slate-500">
+              Home
+            </a>
+          </li>
+          <li className="hover:bg-slate-200 rounded-md p-1">
+            <a href="/" className="text-slate-500">
+              Category
+            </a>
+          </li>
+          <li className="hover:bg-slate-200 rounded-md p-1">
+            <a href="/about" className="text-slate-500">
+              About
+            </a>
+          </li>
+          <li className="hover:bg-slate-200 rounded-md p-1">
+            <User className="w-6 h-6 text-slate-500" />
+          </li>
+          <li className="hover:bg-slate-200 rounded-md p-1">
+            <ShoppingCart className="w-6 h-6 text-slate-500" />
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

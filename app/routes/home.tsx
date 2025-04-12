@@ -1,6 +1,4 @@
 import type { Route } from "./+types/home";
-import { Header } from "~/components/header";
-import { Footer } from "~/components/footer";
 import type { Products } from "~/modules/product/type";
 import { ProductCard } from "~/components/product-card";
 import { Link } from "react-router";
@@ -26,8 +24,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const products = loaderData;
   // console.log("Products:", products);
   return (
-    <div min-h-screen>
-      <Header />
+    <div className="min-h-screen">
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {products.map((product) => (
           <li key={product.id}>
@@ -37,7 +34,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </li>
         ))}
       </ul>
-      <Footer />
     </div>
   );
 }
