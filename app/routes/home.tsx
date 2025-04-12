@@ -3,6 +3,7 @@ import { Header } from "~/components/header";
 import { Footer } from "~/components/footer";
 import type { Products } from "~/modules/product/type";
 import { ProductCard } from "~/components/product-card";
+import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -25,13 +26,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const products = loaderData;
   // console.log("Products:", products);
   return (
-    <div>
+    <div min-h-screen>
       <Header />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <li key={product.id}>
+            <Link to={`/products/${product.slug}`}>
+              <ProductCard key={product.id} product={product} />
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
       <Footer />
     </div>
   );
