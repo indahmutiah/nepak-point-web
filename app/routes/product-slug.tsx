@@ -1,6 +1,4 @@
 import type { Route } from "./+types/product-slug";
-import { Header } from "~/components/header";
-import { Footer } from "~/components/footer";
 import type { Product } from "~/modules/product/type";
 import { parseHtmlToReact } from "~/lib/html";
 import { Link } from "react-router";
@@ -23,7 +21,7 @@ export async function loader({ params }: Route.LoaderArgs) {
   return product;
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function ProductSlug({ loaderData }: Route.ComponentProps) {
   const product = loaderData;
   return (
     <div className=" flex-grow container mx-auto m-4 p-4">
@@ -56,14 +54,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               minimumFractionDigits: 0,
             }).format(product.price)}
           </p>
-          <div className="flex flex-row gap-4 pt-8">
-            <Link
-              to="/"
-              className="text-sm hover:bg-slate-900 rounded-md p-2 text-white bg-background"
-            >
-              Back to Home
-            </Link>
-          </div>
         </div>
       </div>
     </div>

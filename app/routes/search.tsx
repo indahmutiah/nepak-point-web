@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
 import { ProductCard } from "~/components/product-card";
+import { Link } from "react-router";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Nepak Point " },
@@ -24,11 +25,15 @@ export default function Search({ loaderData }: Route.ComponentProps) {
   const products = loaderData;
   return (
     <div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <li key={product.id}>
+            <Link to={`/products/${product.slug}`}>
+              <ProductCard key={product.id} product={product} />
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
