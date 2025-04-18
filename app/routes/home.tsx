@@ -2,6 +2,7 @@ import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
 import { ProductCard } from "~/components/product-card";
 import { Link } from "react-router";
+import { Banner } from "~/components/banner";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -25,6 +26,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   // console.log("Products:", products);
   return (
     <div className="min-h-screen">
+      <Banner />
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {products.map((product) => (
           <li key={product.id}>
