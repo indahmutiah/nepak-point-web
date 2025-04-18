@@ -1,4 +1,4 @@
-export default function ProductSlug() {
+export default function About() {
   return (
     <div className=" flex-grow container mx-auto m-4 p-4">
       <div className="flex bg-card rounded-lg overflow-hidden gap-4">

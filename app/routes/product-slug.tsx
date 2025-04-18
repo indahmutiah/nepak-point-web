@@ -2,6 +2,8 @@ import type { Route } from "./+types/product-slug";
 import type { Product } from "~/modules/product/type";
 import { parseHtmlToReact } from "~/lib/html";
 import { Link } from "react-router";
+import { Button } from "~/components/ui/button";
+import { QtySelector } from "~/components/qty-selector";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -29,11 +31,11 @@ export default function ProductSlug({ loaderData }: Route.ComponentProps) {
         key={product.id}
         className="flex bg-card rounded-lg overflow-hidden gap-4"
       >
-        <div className="aspect-square">
+        <div className="relative w-full">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className=" w-full h-full object-cover aspect-square"
           />
         </div>
         <div className="p-4">
@@ -54,6 +56,19 @@ export default function ProductSlug({ loaderData }: Route.ComponentProps) {
               minimumFractionDigits: 0,
             }).format(product.price)}
           </p>
+          <div className="flex flex-col gap-4 p-4">
+            <QtySelector />
+            <Link to={"/"}>
+              <Button className="w-full bg-slate-600 text-slate-900 hover:bg-slate-500 transition duration-200">
+                Add to Cart
+              </Button>
+            </Link>
+            <Link to={"/"}>
+              <Button className="w-full bg-slate-300 text-slate-900 hover:bg-slate-500 transition duration-200">
+                Buy Now
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

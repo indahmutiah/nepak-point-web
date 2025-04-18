@@ -2,6 +2,7 @@ import { User } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Form } from "react-router";
+import { Link } from "react-router";
 
 export function Header() {
   return (
@@ -13,12 +14,12 @@ export function Header() {
           className="w-24 h-13 rounded-md ml-4"
         />
       </a>
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-row items-center pl-16">
         <Form method="get" action="/search">
           <Input
             name="q"
             placeholder="Search"
-            className="w-full rounded-md p-2 border-2 border-slate-300"
+            className="w-full rounded-md p-2 pl-4 border-2 border-slate-300"
           />
         </Form>
       </div>
@@ -40,7 +41,9 @@ export function Header() {
             </a>
           </li>
           <li className="hover:bg-slate-200 rounded-md p-1">
-            <User className="w-6 h-6 text-slate-500" />
+            <Link to="/login">
+              <User className="w-6 h-6 text-slate-500" />
+            </Link>
           </li>
           <li className="hover:bg-slate-200 rounded-md p-1">
             <ShoppingCart className="w-6 h-6 text-slate-500" />
