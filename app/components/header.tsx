@@ -1,4 +1,4 @@
-import { User } from "lucide-react";
+import { User, UserPlus } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Form } from "react-router";
@@ -30,19 +30,26 @@ export function Header() {
               Home
             </a>
           </li>
-          <li className="hover:bg-slate-200 rounded-md p-1">
+          {/* <li className="hover:bg-slate-200 rounded-md p-1">
             <a href="/" className="text-slate-500">
               Category
             </a>
-          </li>
+          </li> */}
           <li className="hover:bg-slate-200 rounded-md p-1">
             <a href="/about" className="text-slate-500">
               About
             </a>
           </li>
           <li className="hover:bg-slate-200 rounded-md p-1">
-            <Link to="/login">
-              <User className="w-6 h-6 text-slate-500" />
+            <Link to="/login" className="flex items-center text-slate-500">
+              <User className="w-6 h-6" />
+              <span className="ml-2">Login</span>
+            </Link>
+          </li>
+          <li className="hover:bg-slate-200 rounded-md p-1">
+            <Link to="/register" className="flex items-center text-slate-500">
+              <UserPlus className="w-6 h-6" />
+              <span className="ml-2">Register</span>
             </Link>
           </li>
           <li className="hover:bg-slate-200 rounded-md p-1">

@@ -12,5 +12,6 @@ export default [
     route("/products/:slug", "routes/product-slug.tsx"),
     route("/about", "routes/about.tsx"),
     route("/login", "routes/login.tsx"),
+    route("/register", "routes/register.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -20,12 +20,28 @@ export default function Login() {
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl font-bold mb-4">Login</h1>
+      <h1 className="text-3xl font-bold mb-4">Register Account</h1>
       <Form
         method="post"
-        action="/login"
+        action="/register"
         className="bg-card p-6 rounded shadow-md w-full max-w-sm"
       >
+        <div className="mb-4">
+          <Label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-500"
+          >
+            Name
+          </Label>
+          <Input
+            name="name"
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+            required
+          />
+        </div>
         <div className="mb-4">
           <Label
             htmlFor="email"
@@ -59,13 +75,14 @@ export default function Login() {
             onChange={handlePasswordChange}
             required
           />
+          {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
         </div>
         <Button
           type="submit"
           className="w-full bg-slate-600 text-white py-2 rounded hover:bg-slate-700 transition duration-200"
-          disabled={error !== ""}
+          disabled={!!error}
         >
-          Login
+          Register
         </Button>
       </Form>
     </div>
