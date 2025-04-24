@@ -3,8 +3,25 @@ import { Label } from "~/components/ui/label";
 import { Form, Link } from "react-router";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
+import type { Route } from "./+types/register";
 
-export default function Login() {
+export async function action({ request }: Route.ActionArgs) {
+  const formData = await request.formData();
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  const registerUserData = {
+    name: String(name),
+    email: String(email),
+    password: String(password),
+  };
+  console.log(registerUserData);
+
+  return null;
+}
+
+export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
