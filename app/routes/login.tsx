@@ -1,8 +1,39 @@
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { Form, Link } from "react-router";
+import { Form, Link, redirect } from "react-router";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
+import type { Route } from "./+types/login";
+
+export function meta({}: Route.MetaArgs) {
+  return [{ title: "Login - Nepak Point" }];
+}
+
+export async function action({ request }: Route.ActionArgs) {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  const loginUserData = {
+    email: String(email),
+    password: String(password),
+  };
+
+  // Auth Login
+  const response = await fetch(`${process.env.BACKEND_API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(loginUserData),
+  });
+  if (!response.ok) {
+    return null;
+  }
+  const loginResult = await response.json();
+
+  return redirect("/dashboard");
+}
 
 export default function Login() {
   const [password, setPassword] = useState("");
