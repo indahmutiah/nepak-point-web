@@ -1,22 +1,43 @@
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { Form, Link, redirect } from "react-router";
+import { data, Form, Link, redirect } from "react-router";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import type { Route } from "./+types/login";
+import { getSession, commitSession } from "../sessions.server";
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: "Login - Nepak Point" }];
 }
 
+export async function loader({ request }: Route.LoaderArgs) {
+  const session = await getSession(request.headers.get("Cookie"));
+
+  if (session.has("token")) {
+    return redirect("/dashboard");
+  }
+
+  console.log("token:", session.get("token"));
+
+  return data(
+    { error: session.get("error") },
+    {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    }
+  );
+}
+
 export async function action({ request }: Route.ActionArgs) {
+  const session = await getSession(request.headers.get("Cookie"));
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
 
   const loginUserData = {
-    email: String(email),
-    password: String(password),
+    email,
+    password,
   };
 
   // Auth Login
@@ -28,29 +49,42 @@ export async function action({ request }: Route.ActionArgs) {
     body: JSON.stringify(loginUserData),
   });
   if (!response.ok) {
-    return null;
+    session.flash("error", "Invalid username/password");
+    return redirect("/login", {
+      headers: {
+        "Set-Cookie": await commitSession(session),
+      },
+    });
   }
-  const loginResult = await response.json();
+  const loginResult: { token: string } = await response.json();
 
-  return redirect("/dashboard");
+  session.set("token", loginResult.token);
+
+  return redirect("/dashboard", {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
 }
 
-export default function Login() {
+export default function Login({ loaderData }: Route.ComponentProps) {
+  const { error } = loaderData;
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
 
     if (value.length < 8) {
-      setError("Password must be at least 8 characters.");
+      setErrorMessage("Password must be at least 8 characters.");
     } else {
-      setError("");
+      setErrorMessage("");
     }
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
+      {error ? <div className="error">{error}</div> : null}
       <h1 className="text-3xl font-bold mb-4">Login</h1>
       <Form
         method="post"
@@ -94,7 +128,7 @@ export default function Login() {
         <Button
           type="submit"
           className="w-full bg-slate-600 text-white py-2 rounded hover:bg-slate-700 transition duration-200"
-          disabled={error !== ""}
+          disabled={errorMessage !== ""}
         >
           Login
         </Button>
