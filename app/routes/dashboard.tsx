@@ -39,7 +39,8 @@ export default function DashboardPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
-      <pre>{JSON.stringify(loaderData, null, 2)}</pre>
+      <p className="text-lg mb-4">Welcome back, {loaderData.name}!</p>
+      {/* <pre>{JSON.stringify(loaderData, null, 2)}</pre> */}
     </div>
   );
 }
