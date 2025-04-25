@@ -31,11 +31,11 @@ export default function ProductSlug({ loaderData }: Route.ComponentProps) {
         key={product.id}
         className="flex bg-card rounded-lg overflow-hidden gap-4"
       >
-        <div className="relative w-full">
+        <div className="aspect-square">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className=" w-full h-full object-cover aspect-square"
+            className=" w-full h-full object-cover "
           />
         </div>
         <div className="p-4">
