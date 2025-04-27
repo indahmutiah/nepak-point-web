@@ -3,14 +3,9 @@ import { ShoppingCart } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Form } from "react-router";
 import { Link } from "react-router";
-import { getAvatarURL } from "~/lib/avatar";
-import type { User } from "~/modules/user/type";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 
-type NavbarProps = {
-  user: User | null;
-};
-
-export function Header({ user }: NavbarProps) {
+export function Header() {
   return (
     <header className="flex flex-row justify-between items-center w-full h-16 bg-card">
       <a href="/" className="flex flex-row items-center">
@@ -41,6 +36,7 @@ export function Header({ user }: NavbarProps) {
               About
             </a>
           </li>
+
           <li className="hover:bg-slate-200 rounded-md p-1">
             <Link to="/login" className="flex items-center text-slate-500">
               <LogIn className="w-6 h-6" />
@@ -53,6 +49,7 @@ export function Header({ user }: NavbarProps) {
               <span className="ml-2">Register</span>
             </Link>
           </li>
+
           <li className="hover:bg-slate-200 rounded-md p-1">
             <Link to="/cart">
               <ShoppingCart className="w-6 h-6 text-slate-500" />
