@@ -1,10 +1,16 @@
-import { User, UserPlus } from "lucide-react";
+import { LogIn, UserPlus } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Form } from "react-router";
 import { Link } from "react-router";
+import { getAvatarURL } from "~/lib/avatar";
+import type { User } from "~/modules/user/type";
 
-export function Header() {
+type NavbarProps = {
+  user: User | null;
+};
+
+export function Header({ user }: NavbarProps) {
   return (
     <header className="flex flex-row justify-between items-center w-full h-16 bg-card">
       <a href="/" className="flex flex-row items-center">
@@ -30,11 +36,6 @@ export function Header() {
               Home
             </a>
           </li>
-          {/* <li className="hover:bg-slate-200 rounded-md p-1">
-            <a href="/" className="text-slate-500">
-              Category
-            </a>
-          </li> */}
           <li className="hover:bg-slate-200 rounded-md p-1">
             <a href="/about" className="text-slate-500">
               About
@@ -42,7 +43,7 @@ export function Header() {
           </li>
           <li className="hover:bg-slate-200 rounded-md p-1">
             <Link to="/login" className="flex items-center text-slate-500">
-              <User className="w-6 h-6" />
+              <LogIn className="w-6 h-6" />
               <span className="ml-2">Login</span>
             </Link>
           </li>
@@ -53,7 +54,9 @@ export function Header() {
             </Link>
           </li>
           <li className="hover:bg-slate-200 rounded-md p-1">
-            <ShoppingCart className="w-6 h-6 text-slate-500" />
+            <Link to="/cart">
+              <ShoppingCart className="w-6 h-6 text-slate-500" />
+            </Link>
           </li>
         </ul>
       </nav>

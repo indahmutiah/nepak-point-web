@@ -13,8 +13,6 @@ export async function loader({ request }: Route.LoaderArgs) {
   const token = session.get("token");
   console.info("dashboard:token", token);
 
-  // TODO: Get user data
-  // TODO: ky.post("/auth/me")
   const response = await fetch(`${process.env.BACKEND_API_URL}/auth/me`, {
     method: "GET",
     headers: {
