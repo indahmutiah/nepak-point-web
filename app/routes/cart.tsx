@@ -43,7 +43,14 @@ export default function CartPage({ loaderData }: Route.ComponentProps) {
           <Card key={item.id}>
             <CardHeader className="pb-2">
               <div className="flex justify-between items-center">
-                <CardTitle className="text-lg">{item.product.name}</CardTitle>
+                <div className="flex items-center gap-4">
+                  <img
+                    src={item.product.imageUrl}
+                    alt={item.product.name}
+                    className="w-20 h-20 object-cover rounded"
+                  />
+                  <CardTitle className="text-lg">{item.product.name}</CardTitle>
+                </div>
                 <span className="text-lg font-black text-blue-300">
                   {new Intl.NumberFormat("id-ID", {
                     style: "currency",
