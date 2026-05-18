@@ -1,11 +1,13 @@
-import { LogIn, UserPlus } from "lucide-react";
+import { LogIn, LogOut, UserPlus } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
 import { Input } from "~/components/ui/input";
-import { Form } from "react-router";
-import { Link } from "react-router";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Form, Link } from "react-router";
 
-export function Header() {
+type HeaderProps = {
+  isLoggedIn: boolean;
+};
+
+export function Header({ isLoggedIn }: HeaderProps) {
   return (
     <header className="flex flex-row justify-between items-center w-full h-16 bg-card">
       <a href="/" className="flex flex-row items-center">
@@ -37,18 +39,37 @@ export function Header() {
             </a>
           </li>
 
-          <li className="hover:bg-slate-200 rounded-md p-1">
-            <Link to="/login" className="flex items-center text-slate-500">
-              <LogIn className="w-6 h-6" />
-              <span className="ml-2">Login</span>
-            </Link>
-          </li>
-          <li className="hover:bg-slate-200 rounded-md p-1">
-            <Link to="/register" className="flex items-center text-slate-500">
-              <UserPlus className="w-6 h-6" />
-              <span className="ml-2">Register</span>
-            </Link>
-          </li>
+          {isLoggedIn ? (
+            <li className="hover:bg-slate-200 rounded-md p-1">
+              <Form method="post" action="/logout">
+                <button
+                  type="submit"
+                  className="flex items-center text-slate-500"
+                >
+                  <LogOut className="w-6 h-6" />
+                  <span className="ml-2">Logout</span>
+                </button>
+              </Form>
+            </li>
+          ) : (
+            <>
+              <li className="hover:bg-slate-200 rounded-md p-1">
+                <Link to="/login" className="flex items-center text-slate-500">
+                  <LogIn className="w-6 h-6" />
+                  <span className="ml-2">Login</span>
+                </Link>
+              </li>
+              <li className="hover:bg-slate-200 rounded-md p-1">
+                <Link
+                  to="/register"
+                  className="flex items-center text-slate-500"
+                >
+                  <UserPlus className="w-6 h-6" />
+                  <span className="ml-2">Register</span>
+                </Link>
+              </li>
+            </>
+          )}
 
           <li className="hover:bg-slate-200 rounded-md p-1">
             <Link to="/cart">
